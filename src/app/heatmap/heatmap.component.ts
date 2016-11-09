@@ -3,6 +3,7 @@ import { DataObject } from '../models/data-object';
 import { Metadata } from '../models/metadata';
 import { Data } from '../models/data';
 
+
 @Component({
   selector: 'app-heatmap',
   templateUrl: './heatmap.component.html',
@@ -11,15 +12,18 @@ import { Data } from '../models/data';
 export class HeatmapComponent {
   @Input()
   inputArray: Object[][];
-
-  title = "Heatmap";
-
   dataSetArray: DataObject[];
   metaArray: Metadata[];
+  xaxis: Object[];
+  yaxis: Object[];
+
+  title = "Heatmap";
 
   ngOnInit() {
     this.metaArray = [];
     this.dataSetArray = [];
+    this.xaxis = [];
+    this.yaxis = [];
 
     for (var i: number = 0; i < this.inputArray.length; i++){
       var tempArray: Object[] = this.inputArray[i];
@@ -43,16 +47,78 @@ export class HeatmapComponent {
     }
 
     //Test metaArray
-    for(let item of this.metaArray){
-      console.log(item);
-    }
-    console.log(this.metaArray.length);
+    //for(let item of this.metaArray){
+      //console.log(item);
+    //}
+    //console.log(this.metaArray.length);
 
     //Test dataset
-    for(let item of this.dataSetArray){
-      console.log(item);
+    //for(let item of this.dataSetArray){
+      //console.log(item);
+    //}
+  }
+
+  onSelect(selectedMetadata: Metadata): void {
+    for(let meta of this.metaArray) {
+      if(meta.compareTo(selectedMetadata) > -1){
+        if(meta.selected == 0){
+          if(this.checkSelected() < 2){
+          meta.selected = this.checkSelected() + 1;
+          this.fill(meta);
+          }
+        }
+        else if(meta.selected == 1){
+          meta.selected = 0;
+          this.xaxis = [];
+        }
+        else if(meta.selected == 2){
+          meta.selected = 0;
+          this.yaxis = [];
+        }
+      }
     }
   }
 
-  
+  checkSelected(): number {
+    var count: number = 0;
+    for(let meta of this.metaArray){
+      if(meta.selected > count){
+        count = meta.selected;
+      }
+    }
+    return count;
+  }
+
+  fill(meta: Metadata): void {
+    if(meta.selected == 1){
+      for(let data of this.dataSetArray){
+        if(meta.compareTo(data.key) > -1){
+          var contains: boolean = false;
+          for(let test of this.xaxis){
+            if(test == data.value){
+              contains = true;
+            }
+          }
+          if(contains == false){
+            this.xaxis.push(data.value);
+          }
+        }
+      }
+    }
+    if(meta.selected == 2){
+      for(let data of this.dataSetArray){
+        if(meta.compareTo(data.key) > -1){
+          var contains: boolean = false;
+          for(let test of this.yaxis){
+            if(test == data.value){
+              contains = true;
+            }
+          }
+          if(contains == false){
+            this.yaxis.push(data.value);
+          }
+        }
+      }
+    }
+  }
 }

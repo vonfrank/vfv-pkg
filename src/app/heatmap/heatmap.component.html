@@ -1,59 +1,26 @@
 <h2>{{title}}</h2>
-<div class="panel panel-default">
-  {{inputArray[0][3].key}}
-  <!--
-  <table class="table table-hover table-bordered">
-    <thead>
-      <tr>
-        <th class="small">#</th>
-        <th>{{dataArray[0][1]}}</th>
-        <th>MetaX2</th>
-        <th>MetaX3</th>
-        <th>MetaX4</th>
-        <th>MetaX5</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>MetaY1</th>
-        <td>Value</td>
-        <td>Value</td>
-        <td>Value</td>
-        <td bgcolor="#91bbff">Value</td>
-        <td>Value</td>
-      </tr>
-      <tr>
-        <th>MetaY2</th>
-        <td bgcolor="#dbe8ff">Value</td>
-        <td>Value</td>
-        <td>Value</td>
-        <td bgcolor="#dbe8ff">Value</td>
-        <td>Value</td>
-      </tr>
-      <tr>
-        <th>MetaY3</th>
-        <td>Value</td>
-        <td>Value</td>
-        <td bgcolor="#2176ff">Value</td>
-        <td>Value</td>
-        <td bgcolor="#2176ff">Value</td>
-      </tr>
-      <tr>
-        <th>MetaY4</th>
-        <td>Value</td>
-        <td bgcolor="#91bbff">Value</td>
-        <td>Value</td>
-        <td>Value</td>
-        <td>Value</td>
-      </tr>
-      <tr>
-        <th>MetaY5</th>
-        <td>Value</td>
-        <td>Value</td>
-        <td bgcolor="#2176ff">Value</td>
-        <td>Value</td>
-        <td>Value</td>
-      </tr>
-    </tbody>
-  </table>-->
+<hr />
+<div class="row">
+  <div class="col-md-2">
+    <ul class="metadata">
+      <li *ngFor="let meta of metaArray" (click)="onSelect(meta)">
+        {{meta.metaname}} <span class="badge" *ngIf="meta.selected > 0">{{meta.selected}}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-10">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th class="small">#</th>
+          <th *ngFor="let data of xaxis">{{data}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of yaxis">
+          <th>{{data}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

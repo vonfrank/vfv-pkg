@@ -1,5 +1,6 @@
 export class Metadata {
     metaname: string;
+    selected: number = 0;
 
     constructor(metaname: any){
         this.metaname = metaname;

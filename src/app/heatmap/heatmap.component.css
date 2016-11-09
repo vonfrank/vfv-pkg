@@ -1,7 +1,31 @@
+.metadata {
+    list-style-type: none;
+    padding: 0;
+    width: 10em;
+}
+
+.metadata li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: 0 0 .5em 0;
+    padding: .5em 0 .5em .5em;
+    border-radius: 4px;
+}
+
+.metadata li:hover {
+    color: #fff;
+    background-color: #607D8B;;
+}
+
+
+
 th {
     background-color: #f9f9f9;
 }
 
 th.small {
-    width: 30px;
+    width: 10em;
+    height: 3.2em;
 }
