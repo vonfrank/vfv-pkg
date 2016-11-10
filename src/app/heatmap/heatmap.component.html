@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let tis of testArray; let i = index">
-          <td *ngFor="let ty of testArray[i+1]">{{ty}}</td>
+          <td *ngFor="let ty of testArray[i+1]; let j = index">{{ty}}</td>
         </tr>
       </tbody>
     </table>
