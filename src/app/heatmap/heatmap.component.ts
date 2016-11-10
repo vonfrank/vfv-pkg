@@ -16,6 +16,7 @@ export class HeatmapComponent {
   metaArray: Metadata[];
   xaxis: Object[];
   yaxis: Object[];
+  testArray: Object[][];
 
   title = "Heatmap";
 
@@ -24,6 +25,7 @@ export class HeatmapComponent {
     this.dataSetArray = [];
     this.xaxis = [];
     this.yaxis = [];
+    this.testArray = [];
 
     for (var i: number = 0; i < this.inputArray.length; i++){
       var tempArray: Object[] = this.inputArray[i];
@@ -91,19 +93,22 @@ export class HeatmapComponent {
 
   fill(meta: Metadata): void {
     if(meta.selected == 1){
+      var tempHerp: Object[] = [];
+      tempHerp[0] = "#"
       for(let data of this.dataSetArray){
         if(meta.compareTo(data.key) > -1){
           var contains: boolean = false;
-          for(let test of this.xaxis){
+          for(let test of tempHerp){
             if(test == data.value){
               contains = true;
             }
           }
           if(contains == false){
-            this.xaxis.push(data.value);
+            tempHerp.push(data.value);
           }
         }
       }
+      this.testArray[0] = tempHerp;
     }
     if(meta.selected == 2){
       for(let data of this.dataSetArray){
@@ -119,6 +124,10 @@ export class HeatmapComponent {
           }
         }
       }
+    }
+    //Test testArray
+    for(let item of this.testArray){
+      console.log(item);
     }
   }
 }
