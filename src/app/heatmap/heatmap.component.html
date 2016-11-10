@@ -12,12 +12,13 @@
     <table class="table table-hover table-bordered">
       <thead>
         <tr>
-          
+          <th class="small">#</th>
+          <th *ngFor="let data of testArray[0] | slice:1">{{data}}</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          
+        <tr *ngFor="let tis of testArray; let i = index">
+          <td *ngFor="let ty of testArray[i+1]">{{ty}}</td>
         </tr>
       </tbody>
     </table>

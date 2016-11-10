@@ -12,10 +12,9 @@ import { Data } from '../models/data';
 export class HeatmapComponent {
   @Input()
   inputArray: Object[][];
+
   dataSetArray: DataObject[];
   metaArray: Metadata[];
-  xaxis: Object[];
-  yaxis: Object[];
   testArray: Object[][];
 
   title = "Heatmap";
@@ -23,8 +22,6 @@ export class HeatmapComponent {
   ngOnInit() {
     this.metaArray = [];
     this.dataSetArray = [];
-    this.xaxis = [];
-    this.yaxis = [];
     this.testArray = [];
 
     for (var i: number = 0; i < this.inputArray.length; i++){
@@ -160,11 +157,13 @@ export class HeatmapComponent {
         }
       }
     }
-    for(let data of this.testArray){
-      console.log(data);
+  }
+  get1(): Object[] {
+    var temp: Object[] = [];
+    for(let i of this.testArray[0]){
+      temp.push(i);
     }
-
-
+    return temp;
   }
 }
 
