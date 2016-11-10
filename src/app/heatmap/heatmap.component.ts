@@ -71,11 +71,11 @@ export class HeatmapComponent {
         }
         else if(meta.selected == 1){
           meta.selected = 0;
-          this.xaxis = [];
+          this.testArray[0] = [];
         }
         else if(meta.selected == 2){
           meta.selected = 0;
-          this.yaxis = [];
+          this.testArray.splice(1);
         }
       }
     }
@@ -114,20 +114,57 @@ export class HeatmapComponent {
       for(let data of this.dataSetArray){
         if(meta.compareTo(data.key) > -1){
           var contains: boolean = false;
-          for(let test of this.yaxis){
-            if(test == data.value){
+          for(var j: number = 1; j < this.testArray.length; j++){
+            if(this.testArray[j][0] == data.value){
               contains = true;
             }
           }
           if(contains == false){
-            this.yaxis.push(data.value);
+            var tempHerp2: Object[] = [];
+            tempHerp2.push(data.value);
+            for(var n: number = 1; n < this.testArray[0].length; n++){
+              tempHerp2.push(0);
+            }
+            this.testArray.push(tempHerp2);
+            
+          }
+        }
+      }
+      this.fillData();
+    }
+  }
+
+  fillData(): void {
+    var metaX: Metadata;
+    var metaY: Metadata;
+    for(let meta of this.metaArray){
+      if(meta.selected == 1){
+        metaX = meta;
+      }
+      else if(meta.selected == 2){
+        metaY = meta;
+      }
+    }
+    for(var i: number = 1; i < this.testArray.length; i++){
+      for(let data of this.dataSetArray){
+        if(metaY.compareTo(data.key) > -1 && data.value == this.testArray[i][0]){
+          for(let data2 of this.dataSetArray){
+            if(data.identifier == data2.identifier && metaX.compareTo(data2.key) > -1){
+              for(var j: number = 1; j < this.testArray[0].length; j++){
+                if(data2.value == this.testArray[0][j]){
+                  this.testArray[i][j] = <number> this.testArray[i][j] + 1;
+                }
+              }
+            }
           }
         }
       }
     }
-    //Test testArray
-    for(let item of this.testArray){
-      console.log(item);
+    for(let data of this.testArray){
+      console.log(data);
     }
+
+
   }
 }
+
