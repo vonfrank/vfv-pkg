@@ -13,12 +13,12 @@
       <thead>
         <tr>
           <th class="small">#</th>
-          <th *ngFor="let data of testArray[0] | slice:1">{{data}}</th>
+          <th *ngFor="let datax of testArray[0] | slice:1">{{datax}}</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let tis of testArray; let i = index">
-          <td *ngFor="let ty of testArray[i+1]; let j = index">{{ty}}</td>
+        <tr *ngFor="let datay of testArray; let i = index">
+          <td *ngFor="let content of testArray[i + 1]; let j = index">{{content}}</td>
         </tr>
       </tbody>
     </table>

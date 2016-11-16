@@ -25,9 +25,24 @@ export class HeatmapComponent {
     this.testArray = [];
 
     for (var i: number = 0; i < this.inputArray.length; i++){
-      var tempArray: Object[] = this.inputArray[i];
-      for (var j: number = 1; j < tempArray.length; j++){
-        var tempData: Data = <Data> tempArray[j];
+      this.addMetaAndData(this.inputArray[i]);
+    }
+
+    //Test metaArray
+    //for(let item of this.metaArray){
+      //console.log(item);
+    //}
+    //console.log(this.metaArray.length);
+
+    //Test dataset
+    //for(let item of this.dataSetArray){
+      //console.log(item);
+    //}
+  }
+
+  addMetaAndData(input: Object[]): void{
+      for (var j: number = 1; j < input.length; j++){
+        var tempData: Data = <Data> input[j];
         var tempMeta: Metadata = new Metadata(tempData.key);
         var compareValue: number = -1;
 
@@ -41,20 +56,8 @@ export class HeatmapComponent {
           this.metaArray.push(tempMeta);
         }
 
-        this.dataSetArray.push(new DataObject(tempArray[0], tempMeta, tempData.value))
+        this.dataSetArray.push(new DataObject(input[0], tempMeta, tempData.value))
       }
-    }
-
-    //Test metaArray
-    //for(let item of this.metaArray){
-      //console.log(item);
-    //}
-    //console.log(this.metaArray.length);
-
-    //Test dataset
-    //for(let item of this.dataSetArray){
-      //console.log(item);
-    //}
   }
 
   onSelect(selectedMetadata: Metadata): void {
@@ -157,13 +160,6 @@ export class HeatmapComponent {
         }
       }
     }
-  }
-  get1(): Object[] {
-    var temp: Object[] = [];
-    for(let i of this.testArray[0]){
-      temp.push(i);
-    }
-    return temp;
   }
 }
 
