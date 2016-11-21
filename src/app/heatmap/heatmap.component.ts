@@ -13,31 +13,20 @@ export class HeatmapComponent {
   @Input()
   inputArray: Object[][];
 
-  dataSetArray: DataObject[];
+  dataArray: DataObject[];
   metaArray: Metadata[];
-  testArray: Object[][];
+  dataSetArray: Object[][];
 
   title = "Heatmap";
 
   ngOnInit() {
     this.metaArray = [];
+    this.dataArray = [];
     this.dataSetArray = [];
-    this.testArray = [];
 
     for (var i: number = 0; i < this.inputArray.length; i++){
       this.addMetaAndData(this.inputArray[i]);
     }
-
-    //Test metaArray
-    //for(let item of this.metaArray){
-      //console.log(item);
-    //}
-    //console.log(this.metaArray.length);
-
-    //Test dataset
-    //for(let item of this.dataSetArray){
-      //console.log(item);
-    //}
   }
 
   addMetaAndData(input: Object[]): void{
@@ -56,7 +45,7 @@ export class HeatmapComponent {
           this.metaArray.push(tempMeta);
         }
 
-        this.dataSetArray.push(new DataObject(input[0], tempMeta, tempData.value))
+        this.dataArray.push(new DataObject(input[0], tempMeta, tempData.value))
       }
   }
 
@@ -71,11 +60,11 @@ export class HeatmapComponent {
         }
         else if(meta.selected == 1){
           meta.selected = 0;
-          this.testArray[0] = [];
+          this.dataSetArray[0] = [];
         }
         else if(meta.selected == 2){
           meta.selected = 0;
-          this.testArray.splice(1);
+          this.dataSetArray.splice(1);
         }
       }
     }
@@ -93,39 +82,39 @@ export class HeatmapComponent {
 
   fill(meta: Metadata): void {
     if(meta.selected == 1){
-      var tempHerp: Object[] = [];
-      tempHerp[0] = "#"
-      for(let data of this.dataSetArray){
+      var temp: Object[] = [];
+      temp[0] = "#"
+      for(let data of this.dataArray){
         if(meta.compareTo(data.key) > -1){
           var contains: boolean = false;
-          for(let test of tempHerp){
-            if(test == data.value){
+          for(let tempvalue of temp){
+            if(tempvalue == data.value){
               contains = true;
             }
           }
           if(contains == false){
-            tempHerp.push(data.value);
+            temp.push(data.value);
           }
         }
       }
-      this.testArray[0] = tempHerp;
+      this.dataSetArray[0] = temp;
     }
     if(meta.selected == 2){
-      for(let data of this.dataSetArray){
+      for(let data of this.dataArray){
         if(meta.compareTo(data.key) > -1){
           var contains: boolean = false;
-          for(var j: number = 1; j < this.testArray.length; j++){
-            if(this.testArray[j][0] == data.value){
+          for(var j: number = 1; j < this.dataSetArray.length; j++){
+            if(this.dataSetArray[j][0] == data.value){
               contains = true;
             }
           }
           if(contains == false){
-            var tempHerp2: Object[] = [];
-            tempHerp2.push(data.value);
-            for(var n: number = 1; n < this.testArray[0].length; n++){
-              tempHerp2.push(0);
+            var temp: Object[] = [];
+            temp.push(data.value);
+            for(var n: number = 1; n < this.dataSetArray[0].length; n++){
+              temp.push(0);
             }
-            this.testArray.push(tempHerp2);
+            this.dataSetArray.push(temp);
             
           }
         }
@@ -135,29 +124,30 @@ export class HeatmapComponent {
   }
 
   fillData(): void {
-    var metaX: Metadata;
-    var metaY: Metadata;
-    for(let meta of this.metaArray){
-      if(meta.selected == 1){
-        metaX = meta;
-      }
-      else if(meta.selected == 2){
-        metaY = meta;
-      }
-    }
-    for(var i: number = 1; i < this.testArray.length; i++){
-      for(let data of this.dataSetArray){
-        if(metaY.compareTo(data.key) > -1 && data.value == this.testArray[i][0]){
-          for(let data2 of this.dataSetArray){
-            if(data.identifier == data2.identifier && metaX.compareTo(data2.key) > -1){
-              for(var j: number = 1; j < this.testArray[0].length; j++){
-                if(data2.value == this.testArray[0][j]){
-                  this.testArray[i][j] = <number> this.testArray[i][j] + 1;
+    var metaX: Metadata = this.findMeta(1);
+    var metaY: Metadata = this.findMeta(2);
+
+    for(var i: number = 1; i < this.dataSetArray.length; i++){
+      for(let dataY of this.dataArray){
+        if(metaY.compareTo(dataY.key) > -1 && dataY.value == this.dataSetArray[i][0]){
+          for(let dataX of this.dataArray){
+            if(dataY.identifier == dataX.identifier && metaX.compareTo(dataX.key) > -1){
+              for(var j: number = 1; j < this.dataSetArray[0].length; j++){
+                if(dataX.value == this.dataSetArray[0][j]){
+                  this.dataSetArray[i][j] = <number> this.dataSetArray[i][j] + 1;
                 }
               }
             }
           }
         }
+      }
+    }
+  }
+
+  findMeta(selected: number): Metadata {
+    for(let meta of this.metaArray){
+      if(meta.selected == selected){
+        return meta;
       }
     }
   }
