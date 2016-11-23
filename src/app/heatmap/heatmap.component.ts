@@ -35,9 +35,6 @@ export class HeatmapComponent {
   //Gets the entire data set, from the injected data service
   private getDataSet(): void {
     this.dataService.getDataSet().then(dataSet => this.dataSetArray = dataSet);
-    for(let data of this.dataSetArray){
-      console.log(data);
-    }
   }
 
   //onSelect action from html file, runs every time, a metadata has been pressed
