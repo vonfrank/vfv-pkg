@@ -19,7 +19,11 @@
     background-color: #607D8B;;
 }
 
-
+.badge {
+    position: absolute;
+    right: .5em;
+    top: .7em;
+}
 
 th {
     background-color: #f9f9f9;
