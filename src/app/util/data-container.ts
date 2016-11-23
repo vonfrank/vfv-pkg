@@ -1,7 +1,7 @@
 import { DataUtil } from '../util/data-util'
-import { Metadata } from './metadata'
-import { DataObject } from './data-object'
-import { Data } from './data'
+import { Metadata } from '../models/metadata'
+import { DataObject } from '../models/data-object'
+import { Data } from '../models/data'
 
 export class DataContainer {
   private dataArray: DataObject[];

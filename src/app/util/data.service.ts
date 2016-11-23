@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Metadata } from '../models/metadata';
-import { DataContainer } from '../models/data-container';
+import { DataContainer } from './data-container';
 
 //Injectable data service, for VFV-PKG. Data is provided by the data container
 
