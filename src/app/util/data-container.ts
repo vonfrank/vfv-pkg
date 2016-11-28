@@ -27,14 +27,17 @@ export class DataContainer {
 
   getDataSet(): Object[][] {
     this.dataSetArray = this.datautil.generateDataSet(this.dataSetArray, this.dataArray, this.metaArray);
+    for(let data of this.dataSetArray){
+      console.log(data);
+    }
     return this.dataSetArray;
   }
 
   selectMetadata(selectedMeta: Metadata): void {
-    this.metaArray = this.datautil.selectMetadata(selectedMeta, this.metaArray);
+    this.metaArray = this.datautil.selectMetadata(selectedMeta, this.metaArray, this.dataSetArray);
   }
 
-  private addMetaAndData(input: Object[]): void{
+  private addMetaAndData(input: Object[]): void {
     for (var j: number = 1; j < input.length; j++) {
       var tempData: Data = <Data> input[j];
       var tempMeta: Metadata = new Metadata(tempData.key);
@@ -52,5 +55,9 @@ export class DataContainer {
 
       this.dataArray.push(new DataObject(input[0], tempMeta, tempData.value))
     }
+  }
+
+  private clearDataSet(selectedMeta: Metadata): void {
+    this.dataSetArray = this.datautil.clearDataSet(selectedMeta, this.metaArray, this.dataSetArray);
   }
 }
