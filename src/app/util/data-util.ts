@@ -28,9 +28,9 @@ export class DataUtil {
   }
 
   generateDataSet(dataSetArray: Object[][], dataArray: DataObject[], metaArray: Metadata[]): Object[][] {
+    dataSetArray.splice(1);
     for(let meta of metaArray) {
       if(meta.selected == 1) {
-        dataSetArray[0] = [];
         var temp: Object[] = [];
         temp[0] = "#"
         for(let data of dataArray) {
@@ -46,10 +46,10 @@ export class DataUtil {
             }
           }
         }
+        temp.sort();
         dataSetArray[0] = temp;
       }
       if(meta.selected == 2) {
-        dataSetArray.splice(1);
         for(let data of dataArray) {
           if(meta.compareTo(data.key) > -1) {
             var contains: boolean = false;
@@ -71,20 +71,7 @@ export class DataUtil {
         this.fillData(metaArray, dataSetArray, dataArray);
       }
     }
-    return dataSetArray;
-  }
-
-  clearDataSet(selectedMetadata: Metadata, metaArray: Metadata[], dataSetArray: Object[][]): Object[][] {
-    for(let meta of metaArray) {
-      if(meta.compareTo(selectedMetadata) > -1){
-        if(meta.selected == 1){
-          dataSetArray[0] = [];
-        }
-        else if(meta.selected == 2){
-          dataSetArray.splice(1);
-        }
-      }
-    }
+    dataSetArray.sort();
     return dataSetArray;
   }
 

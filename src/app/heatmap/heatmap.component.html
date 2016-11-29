@@ -13,9 +13,14 @@
       <thead>
         <tr>
           <th class="small">#</th>
+          <th *ngFor="let metaX of xArray">{{metaX}}</th>
         </tr>
       </thead>
       <tbody>
+        <tr *ngFor="let metaY of generateViewY(); let i = index">
+          <th>{{metaY}}</th>
+          <td *ngFor="let data of generateViewData(i)">{{data}}</td>
+        </tr>
       </tbody>
     </table>
   </div>

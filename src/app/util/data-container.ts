@@ -26,11 +26,7 @@ export class DataContainer {
   }
 
   getDataSet(): Object[][] {
-    this.dataSetArray = this.datautil.generateDataSet(this.dataSetArray, this.dataArray, this.metaArray);
-    for(let data of this.dataSetArray){
-      console.log(data);
-    }
-    return this.dataSetArray;
+    return this.dataSetArray = this.datautil.generateDataSet(this.dataSetArray, this.dataArray, this.metaArray);
   }
 
   selectMetadata(selectedMeta: Metadata): void {
@@ -55,9 +51,5 @@ export class DataContainer {
 
       this.dataArray.push(new DataObject(input[0], tempMeta, tempData.value))
     }
-  }
-
-  private clearDataSet(selectedMeta: Metadata): void {
-    this.dataSetArray = this.datautil.clearDataSet(selectedMeta, this.metaArray, this.dataSetArray);
   }
 }

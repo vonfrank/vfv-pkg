@@ -15,6 +15,9 @@ export class HeatmapComponent {
 
   metaArray: Metadata[];
   dataSetArray: Object[][];
+  dataArray: Object[];
+
+  xArray: Object[];
 
   //Injecting common data service, provided by app.component
   constructor(private dataService: DataService) { }
@@ -22,9 +25,19 @@ export class HeatmapComponent {
   ngOnInit() {
     this.metaArray = [];
     this.dataSetArray = [];
+    
+    this.xArray = [];
 
     this.getMetadata();
     this.getDataSet();
+  }
+
+    //onSelect action from html file, runs every time, a metadata has been pressed
+  onSelect(selectedMeta: Metadata): void {
+    this.dataService.selectMetadata(selectedMeta).then(metaArray => this.metaArray = metaArray);
+    this.getDataSet();
+
+    this.generateViewX();
   }
 
   //Gets all metadata, from the injected data service
@@ -37,10 +50,29 @@ export class HeatmapComponent {
     this.dataService.getDataSet().then(dataSet => this.dataSetArray = dataSet);
   }
 
-  //onSelect action from html file, runs every time, a metadata has been pressed
-  onSelect(selectedMeta: Metadata): void {
-    this.dataService.selectMetadata(selectedMeta).then(metaArray => this.metaArray = metaArray);
-    this.getDataSet();
+  private generateViewX(): void {
+    this.xArray = [];
+    for(var i: number = 1; i < this.dataSetArray[0].length; i++) {
+      this.xArray.push(this.dataSetArray[0][i]);
+    }
+  }
+
+  private generateViewY(): Object[] {
+    var tempArray: Object[] = [];
+    for(var i: number = 1; i < this.dataSetArray.length; i++) {
+      tempArray.push(this.dataSetArray[i][0]);
+    }
+
+    return tempArray;
+  }
+
+  private generateViewData(pos: number): Object[] {
+    this.dataArray = [];
+    for(var i: number = 1; i < this.dataSetArray[pos + 1].length; i++) {
+      this.dataArray.push(this.dataSetArray[pos + 1][i]);
+    }
+
+    return this.dataArray;
   }
 }
 
