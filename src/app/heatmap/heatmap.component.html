@@ -9,6 +9,11 @@
     </ul>
   </div>
   <div class="col-md-10">
+    <div class="metaTitleX text-center">
+      <div *ngFor="let metaXTitle of metaArray">
+        <span *ngIf="metaXTitle.selected == 1">{{metaXTitle.metaname}}</span>
+      </div>
+    </div>
     <table class="table table-hover table-bordered">
       <thead>
         <tr>
@@ -19,7 +24,7 @@
       <tbody>
         <tr *ngFor="let metaY of generateViewY(); let i = index">
           <th>{{metaY}}</th>
-          <td *ngFor="let data of generateViewData(i)">{{data}}</td>
+          <td *ngFor="let data of generateViewData(i)" [ngStyle]="{'background-color': 'rgba('+ color + ',' + (data/maxValue) +')'}">{{data}}</td>
         </tr>
       </tbody>
     </table>
