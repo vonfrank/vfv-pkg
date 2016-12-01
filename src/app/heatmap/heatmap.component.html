@@ -15,20 +15,17 @@
           <span *ngIf="metaXTitle.selected == 1">{{metaXTitle.metaname}}</span>
         </div>
       </div>
-        <table class="table table-hover table-bordered">
-          <thead>
-            <tr>
-              <th class="small">#</th>
-              <th *ngFor="let metaX of xArray">{{metaX}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let metaY of generateViewY(); let i = index">
-              <th>{{metaY}}</th>
-              <td *ngFor="let data of generateViewData(i)" [ngStyle]="{'background-color': 'rgba('+ color + ',' + (data/maxValue) +')'}">{{data}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <table class="table table-hover table-bordered">
+        <tr>
+          <th rowspan="100" class="title"><div *ngFor="let metaYTitle of metaArray" class="rotate title text-center"><span *ngIf="metaYTitle.selected == 2">{{metaYTitle.metaname}}</span></div></th>
+          <th class="small">#</th>
+          <th *ngFor="let metaX of xArray">{{metaX}}</th>
+        </tr>
+        <tr *ngFor="let metaY of yArray; let i = index">
+          <th>{{metaY}}</th>
+          <td *ngFor="let data of generateViewData(i)" [ngStyle]="{'background-color': 'rgba('+ color + ',' + (data/maxValue) +')'}">{{data}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

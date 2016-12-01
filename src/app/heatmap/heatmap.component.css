@@ -1,3 +1,15 @@
+th {
+    background-color: #f9f9f9;
+}
+
+th.small {
+    width: 6em;
+}
+
+th.title {
+    vertical-align: middle;
+}
+
 .metadata {
     list-style-type: none;
     padding: 0;
@@ -16,7 +28,7 @@
 
 .metadata li:hover {
     color: #fff;
-    background-color: #607D8B;;
+    background-color: #607D8B;
 }
 
 .badge {
@@ -25,46 +37,20 @@
     top: .7em;
 }
 
-th {
-    background-color: #f9f9f9;
-}
-
-td {
-    color: #fff;
-}
-
-th.small {
-    width: 10em;
-    height: 3.2em;
-}
-
-.metaTitleX {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: 0 0 .5em 0;
-    padding: .5em 0 .5em .5em;
-    border-radius: 4px;
-    height: 2.5em;
+.panel-heading {
     font-weight: bold;
-}
-
-.metaTitleY {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    border-radius: 4px;
-    width: 2.5em;
-    height: 200px;
-    font-weight: bold;
+    background-color: #ededed;
 }
 
 .rotate {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+.title {
+    width: 2em;
+    background-color: #ededed;
 }

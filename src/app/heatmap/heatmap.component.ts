@@ -17,8 +17,8 @@ export class HeatmapComponent {
   metaArray: Metadata[];
   dataSetArray: Object[][];
   dataArray: Object[];
-
   xArray: Object[];
+  yArray: Object[];
 
   maxValue: number;
 
@@ -28,8 +28,8 @@ export class HeatmapComponent {
   ngOnInit() {
     this.metaArray = [];
     this.dataSetArray = [];
-    
     this.xArray = [];
+    this.yArray = [];
 
     this.maxValue = 0;
 
@@ -40,9 +40,11 @@ export class HeatmapComponent {
   //onSelect action from html file, runs every time, a metadata has been pressed
   onSelect(selectedMeta: Metadata): void {
     this.dataService.selectMetadata(selectedMeta).then(metaArray => this.metaArray = metaArray);
+    
     this.getDataSet();
 
     this.generateViewX();
+    this.generateViewY();
   }
 
   //Gets all metadata, from the injected data service
@@ -70,13 +72,11 @@ export class HeatmapComponent {
     }
   }
 
-  private generateViewY(): Object[] {
-    var tempArray: Object[] = [];
+  private generateViewY(): void {
+    this.yArray = [];
     for(var i: number = 1; i < this.dataSetArray.length; i++) {
-      tempArray.push(this.dataSetArray[i][0]);
+      this.yArray.push(this.dataSetArray[i][0]);
     }
-
-    return tempArray;
   }
 
   private generateViewData(pos: number): Object[] {
