@@ -29,6 +29,10 @@ th {
     background-color: #f9f9f9;
 }
 
+td {
+    color: #fff;
+}
+
 th.small {
     width: 10em;
     height: 3.2em;
@@ -42,7 +46,7 @@ th.small {
     margin: 0 0 .5em 0;
     padding: .5em 0 .5em .5em;
     border-radius: 4px;
-    min-height: 2.4em;
+    height: 2.5em;
     font-weight: bold;
 }
 
@@ -51,9 +55,16 @@ th.small {
     position: relative;
     left: 0;
     background-color: #EEE;
-    margin: 0 0 .5em 0;
-    padding: .5em 0 .5em .5em;
     border-radius: 4px;
-    height: 100%;
+    width: 2.5em;
+    height: 200px;
     font-weight: bold;
+}
+
+.rotate {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
