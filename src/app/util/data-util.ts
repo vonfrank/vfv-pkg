@@ -32,7 +32,7 @@ export class DataUtil {
     for(let meta of metaArray) {
       if(meta.selected == 1) {
         var temp: Object[] = [];
-        temp[0] = "#"
+        temp[0] = "#";
         for(let data of dataArray) {
           if(meta.compareTo(data.key) > -1) {
             var contains: boolean = false;
@@ -72,6 +72,9 @@ export class DataUtil {
       }
     }
     dataSetArray.sort();
+    for(let data of dataSetArray){
+      console.log(data);
+    }
     return dataSetArray;
   }
 
