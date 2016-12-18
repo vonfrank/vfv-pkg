@@ -2,32 +2,52 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HeatmapComponent } from './heatmap/heatmap.component';
+import { DataService } from './util/data.service';
+import { Data } from './models/data';
+import { Metadata } from './models/metadata';
 
 describe('App: VfvPkg', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        HeatmapComponent
       ],
+      providers: [DataService]
     });
   });
 
-  it('should create the app', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
+  describe('DataService tests', () => {
+    let dataservice:DataService = new DataService();
 
-  it(`should have as title 'app works!'`, async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
+    //Initial test data
+    let testData: Object[][] = [];
+    testData.push([1, new Data("Data 1", 1), new Data("Data 2", 3), new Data("Data 3", "Test")]);
+    testData.push([2, new Data("Data 1", 1), new Data("Data 2", 3), new Data("Data 3", "Test")]);
+    testData.push([3, new Data("Data 1", 1), new Data("Data 2", 3), new Data("Data 3", "Test")]);
 
-  it('should render title in a h1 tag', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
+    dataservice.initializeData(testData);
+
+    it('dataservice.getMetaData should return an array of metadata', () => {
+      let metadata: Metadata[] = [];
+      dataservice.getMetadata().then(metaArray => metadata = metaArray);
+
+      expect(metadata.length).toBe(3);
+    });
+
+    it('dataservice.getDataSet should return a 2 dimensional array of the dataset', () => {
+      let dataSetArray: Object[][] = [];
+      dataservice.getDataSet().then(x => dataSetArray = x);
+
+      expect(dataSetArray.length).toBe(3);
+    });
+
+    it('dataservice.selectMetadata should return an array of metadata', () => {
+      let metadata: Metadata[] = [];
+      dataservice.getMetadata().then(metaArray => metadata = metaArray);
+
+      expect(metadata.length).toBe(3);
+    });
+  });
 });

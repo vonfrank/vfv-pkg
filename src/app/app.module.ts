@@ -5,13 +5,11 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeatmapComponent } from './heatmap/heatmap.component';
-import { BubblechartComponent } from './bubblechart/bubblechart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeatmapComponent,
-    BubblechartComponent
+    HeatmapComponent
   ],
   imports: [
     BrowserModule,
