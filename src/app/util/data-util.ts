@@ -72,9 +72,6 @@ export class DataUtil {
       }
     }
     dataSetArray.sort();
-    for(let data of dataSetArray){
-      console.log(data);
-    }
     return dataSetArray;
   }
 
