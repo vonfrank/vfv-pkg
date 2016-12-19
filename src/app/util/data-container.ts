@@ -9,8 +9,6 @@ export class DataContainer {
   private dataSetArray: Object[][];
   private datautil: DataUtil = new DataUtil();
   
-  constructor(){}
-  
   initializeData(input: Object[][]): void {
     this.dataArray = [];
     this.metaArray = [];

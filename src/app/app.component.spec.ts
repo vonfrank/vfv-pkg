@@ -29,21 +29,21 @@ describe('App: VfvPkg', () => {
 
     dataservice.initializeData(testData);
 
-    it('dataservice.getMetaData should return an array of metadata', () => {
+    it('dataservice.getMetaData should return an array of metadata with length 3', () => {
       let metadata: Metadata[] = [];
       dataservice.getMetadata().then(metaArray => metadata = metaArray);
 
       expect(metadata.length).toBe(3);
     });
 
-    it('dataservice.getDataSet should return a 2 dimensional array of the dataset', () => {
+    it('dataservice.getDataSet should return a 2 dimensional array of the dataset with lenght 3', () => {
       let dataSetArray: Object[][] = [];
       dataservice.getDataSet().then(x => dataSetArray = x);
 
       expect(dataSetArray.length).toBe(3);
     });
 
-    it('dataservice.selectMetadata should return an array of metadata', () => {
+    it('dataservice.selectMetadata should return an array of metadata with length 3', () => {
       let metadata: Metadata[] = [];
       dataservice.getMetadata().then(metaArray => metadata = metaArray);
 
